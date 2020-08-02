@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const RecipeSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'users',
   },
   recipeTitle: {
     type: String,
