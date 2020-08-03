@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .login {
+    &-form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 40%;
+      background-color: #fff;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgb(129, 129, 129);
+      border-radius: 5px;
+      margin-top: 10px;
+
+      &-title {
+        font-size: 2rem;
+        margin: 16px 0;
+      }
+
+      .form {
+        &-field {
+          width: 100%;
+        }
+        &-submit {
+          width: 50%;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    &-error {
+      margin: 5px 0 20px 0;
+      font-size: 1rem;
+      color: crimson;
+    }
+  }
+}

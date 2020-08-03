@@ -1,0 +1,40 @@
+.add-recipe-form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-height: 350px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 25px;
+  overflow: auto;
+
+  mat-form-field {
+    width: 100%;
+  }
+  h2 {
+    color: #3d5afe;
+  }
+
+  .add-step-btn {
+    background-color: #3d5afe;
+    margin-bottom: 10px;
+  }
+
+  .radio-btn {
+    margin-right: 16px;
+  }
+}
+
+.button-div {
+  margin-left: auto;
+
+  .finished {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+  .submit-btn {
+    margin-left: 10px;
+  }
+}

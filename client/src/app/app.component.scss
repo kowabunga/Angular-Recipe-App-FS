@@ -1,0 +1,9 @@
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #37354b;
+  .mat-icon-rest-menu {
+    transform: scale(1.3);
+  }
+}

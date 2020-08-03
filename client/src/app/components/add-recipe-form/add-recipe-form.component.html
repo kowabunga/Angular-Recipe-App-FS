@@ -1,0 +1,157 @@
+<mat-dialog-content class="add-recipe-form">
+  <form #addForm="ngForm" (ngSubmit)="addStep(addForm)">
+    <h2>
+      {{
+        firstSubmit
+          ? "Add Recipe Description"
+          : count === 1
+          ? "Add Ingredients List"
+          : "Add Recipe Step"
+      }}
+    </h2>
+
+    <!-- Recipe Title/Step Title -->
+    <mat-form-field appearance="standard">
+      <mat-label>{{ firstSubmit ? "Recipe Title" : "Step Title" }}</mat-label>
+      <input
+        matInput
+        name="title"
+        #recipeTitle="ngModel"
+        [(ngModel)]="recipeStep.title"
+        required
+        class="first-input"
+      />
+      <br />
+    </mat-form-field>
+
+    <!-- Recipe Description/Step Direction -->
+    <mat-form-field appearance="standard">
+      <mat-label>{{
+        firstSubmit ? "Recipe Description" : "Step Directions"
+      }}</mat-label>
+      <input
+        matInput
+        name="directions"
+        #recipeDirections="ngModel"
+        [(ngModel)]="recipeStep.directions"
+        required
+      />
+      <br />
+    </mat-form-field>
+
+    <!-- Ingredients input - first step only -->
+    <mat-form-field appearance="standard" *ngIf="count === 1">
+      <mat-label>{{ "Ingredients" }}</mat-label>
+      <input
+        class="ingredients-input"
+        matInput
+        name="ingredients"
+        #recipeIngredients="ngModel"
+        [(ngModel)]="ingredients"
+        required
+      />
+      <br />
+      <mat-hint>Add your ingredients separated by a comma ","</mat-hint>
+    </mat-form-field>
+
+    <!-- Ingredients input - first step only -->
+    <mat-form-field appearance="standard" *ngIf="count > 1">
+      <mat-label>{{ "Step Timer (optional)" }}</mat-label>
+      <input
+        matInput
+        name="timer"
+        #recipeTImer="ngModel"
+        [(ngModel)]="recipeStep.timer"
+      />
+      <br />
+      <mat-hint>
+        Enter the time for this step, if required, in the following format:
+        <strong>HOURS:MINUTES</strong>
+        E.g. 15 minutes = 0:15, 1 hour 5 minutes =1:5
+      </mat-hint>
+    </mat-form-field>
+
+    <!-- Recipe Step Media Input -->
+    <mat-form-field appearance="standard" *ngIf="count !== 1">
+      <mat-label>{{
+        firstSubmit ? "Image" : "Image or Video (optional)"
+      }}</mat-label>
+      <input
+        matInput
+        name="media"
+        #recipeImages="ngModel"
+        [(ngModel)]="recipeStep.media"
+        required="{{ firstSubmit }}"
+      />
+      <mat-hint>{{
+        firstSubmit
+          ? "Add an image of your finished dish"
+          : "If you believe it will help users recreate your recipe, add a link to an image or to a Youtube or Vimeo video for this recipe step. Please select the type of media below as well."
+      }}</mat-hint>
+    </mat-form-field>
+
+    <br />
+    <br />
+    <!-- Media input type choice -->
+    <mat-radio-group
+      *ngIf="recipeStep.media !== '' && count > 0"
+      name="mediaType"
+      [(ngModel)]="recipeStep.mediaType"
+      required
+    >
+      <mat-radio-button value="image" class="radio-btn" color="primary"
+        >Image</mat-radio-button
+      >
+      <mat-radio-button value="video" class="radio-btn" color="primary"
+        >Video</mat-radio-button
+      >
+    </mat-radio-group>
+
+    <!-- Additional information -->
+    <mat-form-field appearance="standard" *ngIf="count > 1">
+      <mat-label>
+        Additional Information (Optional)
+      </mat-label>
+      <textarea
+        matInput
+        name="optional"
+        #recipeOptionalContent="ngModel"
+        [(ngModel)]="recipeStep.optional"
+      ></textarea>
+      <mat-hint
+        >Add any information you think is required outside of the step's
+        directions.</mat-hint
+      >
+    </mat-form-field>
+
+    <br />
+    <br />
+    <button
+      mat-stroked-button
+      type="submit"
+      [disabled]="!addForm.valid"
+      color="primary"
+    >
+      {{ firstSubmit ? "Add Description" : "Add Step " }}
+    </button>
+  </form>
+</mat-dialog-content>
+
+<!-- Actions for dialog  -->
+<mat-dialog-actions>
+  <div *ngIf="count > 2" class="button-div">
+    <span class="finished"
+      >Finished? Make sure to add the current step first if necessary!</span
+    >
+    <button
+      class="submit-btn"
+      color="primary"
+      mat-stroked-button
+      mat-dialog-close
+      (click)="addRecipe()"
+      [disabled]="recipeSteps.length < 2"
+    >
+      Submit Recipe
+    </button>
+  </div>
+</mat-dialog-actions>

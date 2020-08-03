@@ -1,0 +1,55 @@
+<div class="catchy-intro">
+  <h1 class="home-title mat-display-2">
+    All for your enjoyment.
+  </h1>
+  <p class="home-desc mat-headline">
+    Try some of our favorites below. You can even add your own!
+  </p>
+</div>
+
+<main class="home-page-main">
+  <a
+    mat-stroked-button
+    class="add-recipe-btn"
+    color="primary"
+    (click)="openAddRecipeDialog()"
+    *ngIf="loggedIn"
+  >
+    <mat-icon>{{ chosenId === "" ? "add" : "arrow_back" }}</mat-icon>
+    {{ chosenId === "" ? "Add Recipe" : "Back to Recipes" }}
+  </a>
+
+  <section class="recipe-list" *ngIf="chosenId === ''">
+    <mat-card
+      *ngFor="let recipe of recipes; let indexOfElement = index"
+      class="recipe-link"
+      [attr.recipeid]="recipe._id.toString()"
+    >
+      <mat-card-title class="card-title"
+        >{{ recipe.recipeTitle }}
+      </mat-card-title>
+
+      <mat-card-content class="content-size mat-body-2 card-desc">
+        {{ recipe.recipeDescription }}
+      </mat-card-content>
+
+      <div class="recipe-card-content-image">
+        <img
+          [src]="recipe.recipeImage"
+          alt="{{ recipe.recipeDescription }} card photo"
+        />
+      </div>
+
+      <mat-card-footer class="view-recipe">
+        <button mat-stroked-button color="primary">
+          View Recipe
+        </button>
+      </mat-card-footer>
+    </mat-card>
+  </section>
+
+  <!-- <app-recipe-step-card
+    [chosenId]="chosenId"
+    *ngIf="chosenId !== ''"
+  ></app-recipe-step-card> -->
+</main>

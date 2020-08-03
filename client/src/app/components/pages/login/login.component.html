@@ -1,0 +1,32 @@
+<div class="container">
+  <form (submit)="onLoginSubmit()" class="login-form">
+    <h1 class="login-form-title">Login</h1>
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="email"
+        matInput
+        name="email"
+        [(ngModel)]="email"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        required
+        minlength="6"
+      />
+    </mat-form-field>
+    <p class="login-error" *ngIf="error">{{ error }} - Please try again</p>
+    <button type="submit" mat-flat-button color="primary" class="form-submit">
+      Login
+    </button>
+  </form>
+</div>
