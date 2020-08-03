@@ -26,7 +26,7 @@ router.post(
 
       if (!user) {
         return res
-          .status(400)
+          .status(401)
           .json({ success: false, error: 'Invalid Credentials' });
       }
 
@@ -35,7 +35,7 @@ router.post(
 
       if (!passMatch) {
         return res
-          .status(400)
+          .status(401)
           .json({ success: false, error: 'Invalid Credentials' });
       }
 

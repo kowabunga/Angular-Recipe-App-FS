@@ -8,12 +8,14 @@ dotenv.config({ path: './config/config.env' });
 
 connectDb();
 
+// Middleware
 // Body parser
 const app = express();
 
-app.use(express.json({ extended: false }));
+// CORS
+app.use(cors());
 
-const PORT = process.env.PORT || 8080;
+app.use(express.json({ extended: false }));
 
 // API Routes - Recipes
 const recipes = require('./api/routes/recipes');
@@ -22,9 +24,8 @@ const auth = require('./api/routes/auth');
 
 app.use('/api/recipes', recipes);
 app.use('/api/users', users);
-app.use('/api/auth',auth)
+app.use('/api/auth', auth);
 
-// CORS
-app.use(cors());
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

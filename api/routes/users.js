@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
+const auth = require('../../middleware/auth');
 
 // @route   POST api/users
 // @desc    Create user
@@ -52,7 +53,7 @@ router.post(
 
       console.log(user);
 
-      //   create and return jwt
+      //   create and return jwt adding user id as payload
       const payload = {
         user: {
           id: user.id,
@@ -77,5 +78,25 @@ router.post(
     }
   }
 );
+
+// @route   GET api/users/recipes
+// @desc    Get recipes for by userId
+// @access  private
+router.get('/recipes', auth, async (req, res) => {
+  try {
+    const recipes = await Recipe.find({ user: req.user.id });
+
+    if (!recipes) {
+      return res
+        .status(400)
+        .json({ success: false, error: 'User has no recipes' });
+    }
+
+    res.status(200).json({ success: true, recipes: recipes });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
