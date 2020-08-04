@@ -149,7 +149,7 @@
       mat-stroked-button
       mat-dialog-close
       (click)="addRecipe()"
-      [disabled]="recipeSteps.length < 2"
+      [disabled]="count < 3"
     >
       Submit Recipe
     </button>

@@ -13,6 +13,8 @@ import {
 } from '@angular/material/snack-bar';
 import { Recipe } from 'src/app/models/Recipe';
 
+// @TODO make into own component
+
 @Component({
   selector: 'app-add-recipe-form',
   templateUrl: './add-recipe-form.component.html',
