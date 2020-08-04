@@ -12,9 +12,22 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-form.component';
 import { RecipeStepCardComponent } from './components/recipe-step-card/recipe-step-card.component';
 import { RegisterComponent } from './components/pages/register/register.component';
+import { ViewRecipeComponent } from './components/view-recipe/view-recipe.component';
+import { StepTimerComponent } from './components/step-timer/step-timer.component';
+import { SanitizePipe } from './pipes/sanitize.pipe';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, AddRecipeFormComponent, RecipeStepCardComponent, RegisterComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    AddRecipeFormComponent,
+    RecipeStepCardComponent,
+    RegisterComponent,
+    ViewRecipeComponent,
+    StepTimerComponent,
+    SanitizePipe,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

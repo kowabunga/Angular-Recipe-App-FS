@@ -27,6 +27,12 @@ export class RecipesService {
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
+  getRecipeById(id: string): Observable<Recipe> {
+    return this.http
+      .get<Recipe>(`http://localhost:8080/api/recipes/${id}`)
+      .pipe(catchError(this.errorHandler.handleHttpError));
+  }
+
   addRecipe(recipe: Recipe): Observable<any> {
     return this.http
       .post<any>('http://localhost:8080/api/recipes', recipe, httpOptions)

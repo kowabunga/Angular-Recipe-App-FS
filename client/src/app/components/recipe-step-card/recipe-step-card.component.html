@@ -1,1 +1,102 @@
-<p>recipe-step-card works!</p>
+<mat-tab-group
+  dynamicHeight
+  mat-align-tabs="center"
+  [(selectedIndex)]="currentTab"
+>
+  <mat-tab
+    *ngFor="let recipe of recipeSteps; let indexOfElement = index"
+    label="{{
+      indexOfElement === 0 ? 'Ingredients' : 'Step ' + indexOfElement
+    }}"
+  >
+    <!-- put card in a div wrapper to add padding such that card does not get clipped by tab body -->
+    <div class="card-wrapper">
+      <mat-card class="mat-tab-item-card">
+        <mat-card-header>
+          <mat-card-title>
+            <span class="step-x mat-headline">{{ recipe.title }}</span>
+          </mat-card-title>
+        </mat-card-header>
+
+        <app-step-timer
+          class="step-timer"
+          [stepTime]="recipe.timer"
+          *ngIf="recipe.timer"
+        ></app-step-timer>
+
+        <!-- Display a differently formated card for ingredients list (first step of recipe) -->
+        <mat-card-content class="card-content" *ngIf="indexOfElement === 0">
+          <br />
+          {{ recipe.directions }}
+          <br />
+          <br />
+          <mat-selection-list>
+            <mat-list-option
+              *ngFor="let ingredient of ingredients"
+              color="primary"
+              checkboxPosition="before"
+              >{{ ingredient }}</mat-list-option
+            >
+          </mat-selection-list>
+        </mat-card-content>
+
+        <!-- Display a differently formated card for recipe step (after first step) -->
+        <mat-card-content class="card-content" *ngIf="indexOfElement > 0">
+          <strong>Directions:</strong>
+          <br />
+          <br />
+
+          {{ recipe.directions }}
+          <br />
+          <br />
+          <strong *ngIf="recipe.media"
+            >Additional Information and Media:</strong
+          >
+          <br />
+          {{ recipe.optional }}
+          <br />
+
+          <img
+            [src]="recipe.media"
+            alt="recipe step {{ indexOfElement + 1 }} image"
+            *ngIf="recipe.media && recipe.mediaType === 'image'"
+            mat-card-image
+          />
+
+          <div
+            class="iframe-wrapper"
+            *ngIf="
+              recipe.media && recipe.mediaType === 'video' && validVideoWebsite
+            "
+          >
+            <iframe
+              [src]="recipe.media | sanitize"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </mat-card-content>
+
+        <div class="pagination-buttons">
+          <button
+            (click)="prevStep()"
+            mat-stroked-button
+            [disabled]="currentTab === 0"
+            color="primary"
+          >
+            <mat-icon>arrow_back</mat-icon> Prev
+          </button>
+          <button
+            (click)="nextStep()"
+            mat-stroked-button
+            [disabled]="currentTab === recipeSteps.length - 1"
+            color="primary"
+          >
+            Next <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -8,6 +8,7 @@
 </div>
 
 <main class="home-page-main">
+  <!-- Redo this into add-recipe page link -->
   <a
     mat-stroked-button
     class="add-recipe-btn"
@@ -15,15 +16,13 @@
     (click)="openAddRecipeDialog()"
     *ngIf="loggedIn"
   >
-    <mat-icon>{{ chosenId === "" ? "add" : "arrow_back" }}</mat-icon>
-    {{ chosenId === "" ? "Add Recipe" : "Back to Recipes" }}
+    <mat-icon>{{ "add" }}</mat-icon> Add Recipe
   </a>
 
-  <section class="recipe-list" *ngIf="chosenId === ''">
+  <section class="recipe-list">
     <mat-card
       *ngFor="let recipe of recipes; let indexOfElement = index"
       class="recipe-link"
-      [attr.recipeid]="recipe._id.toString()"
     >
       <mat-card-title class="card-title"
         >{{ recipe.recipeTitle }}
@@ -41,15 +40,14 @@
       </div>
 
       <mat-card-footer class="view-recipe">
-        <button mat-stroked-button color="primary">
+        <a
+          mat-stroked-button
+          color="primary"
+          routerLink="/recipe/{{ recipe._id.toString() }}"
+        >
           View Recipe
-        </button>
+        </a>
       </mat-card-footer>
     </mat-card>
   </section>
-
-  <!-- <app-recipe-step-card
-    [chosenId]="chosenId"
-    *ngIf="chosenId !== ''"
-  ></app-recipe-step-card> -->
 </main>

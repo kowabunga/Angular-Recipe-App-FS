@@ -13,16 +13,16 @@ export class RegisterComponent implements OnInit {
   name: string;
   error: string;
 
-  constructor(private user: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onRegisterSubmit(): void {
-    this.user.register(this.name, this.email, this.password).subscribe(
+    this.userService.register(this.name, this.email, this.password).subscribe(
       (data) => {
         localStorage.setItem('jwt', data.token);
         this.router.navigate(['/']);
-        this.user.changeLoginStatus(true);
+        this.userService.changeLoginStatus(true);
       },
       (error) => {
         this.error = error.error.error;

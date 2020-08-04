@@ -24,6 +24,7 @@ export class UserService {
 
   login(email: string, password: string): Observable<any> {
     let user = { email, password };
+
     return this.http
       .post<any>('http://localhost:8080/api/auth', user, httpOptions)
       .pipe(catchError(this.errorHandler.handleHttpError));

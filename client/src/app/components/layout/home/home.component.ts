@@ -12,19 +12,18 @@ import { AddRecipeFormComponent } from '../../add-recipe-form/add-recipe-form.co
 })
 export class HomeComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
-  chosenId: string = '';
   loggedIn: boolean = false;
   observerArr: any = [];
 
   constructor(
     private recipeService: RecipesService,
     private dialog: MatDialog,
-    private user: UserService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.observerArr.push(
-      this.user.loggedIn.subscribe((data) => (this.loggedIn = data))
+      this.userService.loggedIn.subscribe((data) => (this.loggedIn = data))
     );
 
     this.observerArr.push(

@@ -1,0 +1,30 @@
+<div [ngClass]="{ noTimer: noTimer }">
+  <!-- timer start button -->
+  <button
+    class="start"
+    mat-mini-fab
+    color="primary"
+    (click)="startTimer()"
+    [disabled]="clicked"
+  >
+    Start
+  </button>
+
+  <!-- time display -->
+  <span class="timer" [ngClass]="addClass()">
+    {{ hours }}:{{ minutes <= 9 ? "0" + minutes : minutes }}:{{
+      seconds <= 9 ? "0" + seconds : seconds
+    }}
+  </span>
+
+  <!-- timer reset button -->
+  <button
+    class="reset"
+    mat-mini-fab
+    color="accent"
+    (click)="resetTimer()"
+    [disabled]="!clicked"
+  >
+    Reset
+  </button>
+</div>
