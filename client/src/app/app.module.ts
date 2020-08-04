@@ -10,10 +10,10 @@ import { MaterialModule } from './material/material.module';
 import { SanitizePipe } from './pipes/sanitize.pipe';
 
 import { HomeComponent } from './components/layout/home/home.component';
-import { LoginComponent } from './components/pages/login/login.component';
+import { LoginComponent } from './components/user/login/login.component';
 import { AddRecipeFormComponent } from './components/recipes/add-recipe-form/add-recipe-form.component';
 import { RecipeStepCardComponent } from './components/recipes/recipe-step-card/recipe-step-card.component';
-import { RegisterComponent } from './components/pages/register/register.component';
+import { RegisterComponent } from './components/user/register/register.component';
 import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recipe.component';
 import { StepTimerComponent } from './components/step-timer/step-timer.component';
 
