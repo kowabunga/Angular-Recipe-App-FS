@@ -13,7 +13,7 @@
     mat-stroked-button
     class="add-recipe-btn"
     color="primary"
-    (click)="openAddRecipeDialog()"
+    routerLink="/recipe/add"
     *ngIf="loggedIn"
   >
     <mat-icon>{{ "add" }}</mat-icon> Add Recipe

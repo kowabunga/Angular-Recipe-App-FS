@@ -12,8 +12,7 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Recipe } from 'src/app/models/Recipe';
-
-// @TODO make into own component
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-recipe-form',
@@ -54,13 +53,14 @@ export class AddRecipeFormComponent implements OnInit, OnDestroy {
   constructor(
     private recipeService: RecipesService,
     private snackBar: MatSnackBar,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
 
   ngOnDestroy(): void {
-    this.recipeAdd.unsubscribe();
+    if (this.recipeAdd !== undefined) this.recipeAdd.unsubscribe();
   }
 
   addStep({ value, valid }: { value: any; valid: boolean }): void {
@@ -115,7 +115,9 @@ export class AddRecipeFormComponent implements OnInit, OnDestroy {
   addRecipe(): void {
     this.recipe.recipeSteps = this.recipeSteps;
     this.recipeAdd = this.recipeService.addRecipe(this.recipe).subscribe(
-      (data) => console.log(data),
+      (data) => {
+        this.router.navigate(['/']);
+      },
       (error) => {
         console.log(error);
       }

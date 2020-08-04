@@ -37,19 +37,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.observerArr.forEach((item) => item.unsubscribe());
   }
 
-  // @TODO rework this logic - don't like double subscriptions
-  openAddRecipeDialog(): void {
-    let dialogRef = this.dialog.open(AddRecipeFormComponent);
-    // after dialog is closed, subscribe to event and update recipes
-    // recipes will only update if new one is added
-    this.observerArr.push(
-      dialogRef.afterClosed().subscribe((result) => {
-        this.observerArr.push(
-          this.recipeService.getRecipes().subscribe((recipeArray) => {
-            this.recipes = recipeArray;
-          })
-        );
-      })
-    );
-  }
+  // // @TODO rework this logic - don't like double subscriptions
+  // openAddRecipeDialog(): void {
+  //   let dialogRef = this.dialog.open(AddRecipeFormComponent);
+  //   // after dialog is closed, subscribe to event and update recipes
+  //   // recipes will only update if new one is added
+  //   this.observerArr.push(
+  //     dialogRef.afterClosed().subscribe((result) => {
+  //       this.observerArr.push(
+  //         this.recipeService.getRecipes().subscribe((recipeArray) => {
+  //           this.recipes = recipeArray;
+  //         })
+  //       );
+  //     })
+  //   );
+  // }
 }

@@ -1,13 +1,17 @@
 .add-recipe-form {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 50%;
   min-height: 350px;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   padding: 25px;
   overflow: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgb(129, 129, 129);
+  margin-top: 10px;
+  border-radius: 5px;
 
   mat-form-field {
     width: 100%;
@@ -24,17 +28,26 @@
   .radio-btn {
     margin-right: 16px;
   }
+
+  .button-div {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .finished {
+      font-size: 1rem;
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+
+    .submit-btn {
+      margin-top: 10px;
+    }
+  }
 }
 
-.button-div {
-  margin-left: auto;
-
-  .finished {
-    font-size: 1rem;
-    letter-spacing: 1px;
-    font-weight: 300;
-  }
-  .submit-btn {
-    margin-left: 10px;
+@media (max-width: 800px) {
+  .add-recipe-form {
+    width: 75%;
   }
 }

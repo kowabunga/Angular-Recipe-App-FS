@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { SanitizePipe } from './pipes/sanitize.pipe';
+
 import { HomeComponent } from './components/layout/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { AddRecipeFormComponent } from './components/recipes/add-recipe-form/add-recipe-form.component';
@@ -14,7 +16,6 @@ import { RecipeStepCardComponent } from './components/recipes/recipe-step-card/r
 import { RegisterComponent } from './components/pages/register/register.component';
 import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recipe.component';
 import { StepTimerComponent } from './components/step-timer/step-timer.component';
-import { SanitizePipe } from './pipes/sanitize.pipe';
 
 @NgModule({
   declarations: [
