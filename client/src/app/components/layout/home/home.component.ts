@@ -3,7 +3,7 @@ import { Recipe } from '../../../models/Recipe';
 import { MatDialog } from '@angular/material/dialog';
 import { RecipesService } from '../../../services/recipes.service';
 import { UserService } from '../../../services/user.service';
-import { AddRecipeFormComponent } from '../../add-recipe-form/add-recipe-form.component';
+import { AddRecipeFormComponent } from '../../recipes/add-recipe-form/add-recipe-form.component';
 
 @Component({
   selector: 'app-home',

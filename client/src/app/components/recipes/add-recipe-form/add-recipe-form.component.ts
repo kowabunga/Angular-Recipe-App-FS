@@ -5,8 +5,8 @@ import {
   ElementRef,
   OnDestroy,
 } from '@angular/core';
-import { RecipeStep } from '../../models/RecipeStep';
-import { RecipesService } from '../../services/recipes.service';
+import { RecipeStep } from '../../../models/RecipeStep';
+import { RecipesService } from '../../../services/recipes.service';
 import {
   MatSnackBar,
   MatSnackBarVerticalPosition,

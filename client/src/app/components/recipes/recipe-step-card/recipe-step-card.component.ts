@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, SecurityContext } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from 'src/app/models/Recipe';
 import { RecipesService } from 'src/app/services/recipes.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { RecipeStep } from 'src/app/models/RecipeStep';
 
 @Component({
@@ -18,10 +17,7 @@ export class RecipeStepCardComponent implements OnInit {
   // Current tab is bound to the selectedIndex property of the mat-tab-group. Changes in this value will reflect on the opened tab in the browser.
   currentTab: number = 0;
 
-  constructor(
-    private recipeService: RecipesService,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor(private recipeService: RecipesService) {}
 
   ngOnInit(): void {
     this.recipeSteps = this.recipe.recipeSteps;

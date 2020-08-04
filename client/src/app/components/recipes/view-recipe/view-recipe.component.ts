@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../../models/Recipe';
-import { RecipesService } from '../../services/recipes.service';
+import { Recipe } from '../../../models/Recipe';
+import { RecipesService } from '../../../services/recipes.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,11 +17,12 @@ export class ViewRecipeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((data) => (this.id = data.id));
+    this.activatedRoute.params.subscribe((data) => {
+      this.id = data.id;
+    });
 
     this.recipesService.getRecipeById(this.id).subscribe((data) => {
       this.recipe = data;
-      // console.log(this.recipe);
     });
   }
 }
