@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 import { RecipeStep } from '../../models/RecipeStep';
 import { RecipesService } from '../../services/recipes.service';
 import {
@@ -6,17 +12,17 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { Recipe } from 'src/app/models/Recipe';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-add-recipe-form',
   templateUrl: './add-recipe-form.component.html',
   styleUrls: ['./add-recipe-form.component.scss'],
 })
-export class AddRecipeFormComponent implements OnInit {
-  // Let home page know when recipe has been added to reload new array items
+export class AddRecipeFormComponent implements OnInit, OnDestroy {
   // Add viewChild on form to reset it
   @ViewChild('addForm') form;
+
+  recipeAdd: any;
 
   firstSubmit: boolean = true;
   count = 0;
@@ -45,12 +51,15 @@ export class AddRecipeFormComponent implements OnInit {
 
   constructor(
     private recipeService: RecipesService,
-    private userService: UserService,
     private snackBar: MatSnackBar,
     private elRef: ElementRef
   ) {}
 
   ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.recipeAdd.unsubscribe();
+  }
 
   addStep({ value, valid }: { value: any; valid: boolean }): void {
     // if submission is valid and not the first submission, push title, directions, and the image array (if provided) and push to recStep. Then push recipe step to greater recipe
@@ -103,7 +112,7 @@ export class AddRecipeFormComponent implements OnInit {
 
   addRecipe(): void {
     this.recipe.recipeSteps = this.recipeSteps;
-    this.recipeService.addRecipe(this.recipe).subscribe(
+    this.recipeAdd = this.recipeService.addRecipe(this.recipe).subscribe(
       (data) => console.log(data),
       (error) => {
         console.log(error);

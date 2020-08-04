@@ -11,9 +11,10 @@ import { HomeComponent } from './components/layout/home/home.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { AddRecipeFormComponent } from './components/add-recipe-form/add-recipe-form.component';
 import { RecipeStepCardComponent } from './components/recipe-step-card/recipe-step-card.component';
+import { RegisterComponent } from './components/pages/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, AddRecipeFormComponent, RecipeStepCardComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, AddRecipeFormComponent, RecipeStepCardComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

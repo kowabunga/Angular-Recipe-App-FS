@@ -28,7 +28,6 @@ export class RecipesService {
   }
 
   addRecipe(recipe: Recipe): Observable<any> {
-    console.log(recipe);
     return this.http
       .post<any>('http://localhost:8080/api/recipes', recipe, httpOptions)
       .pipe(catchError(this.errorHandler.handleHttpError));

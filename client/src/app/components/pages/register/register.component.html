@@ -1,6 +1,19 @@
 <div class="container">
-  <form (submit)="onLoginSubmit()" class="login-form">
-    <h1 class="login-form-title">Login</h1>
+  <form (submit)="onRegisterSubmit()" class="login-form">
+    <h1 class="login-form-title">Register</h1>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        type="text"
+        matInput
+        name="name"
+        [(ngModel)]="name"
+        required
+      />
+    </mat-form-field>
+
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Email</mat-label>
       <input
@@ -24,12 +37,12 @@
         minlength="6"
       />
     </mat-form-field>
-    <p class="login-error" *ngIf="error">{{ error }} - Please try again</p>
+    <p class="login-error" *ngIf="error">Error: {{ error }}</p>
     <button type="submit" mat-flat-button color="primary" class="form-submit">
-      Login
+      Register
     </button>
-    <p class="register">
-      Don't have an account? <a routerLink="/register">Register</a>
+    <p class="login">
+      Already have an account? <a routerLink="/login">Login</a>
     </p>
   </form>
 </div>
