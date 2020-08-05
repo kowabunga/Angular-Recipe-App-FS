@@ -16,6 +16,10 @@ import { RecipeStepCardComponent } from './components/recipes/recipe-step-card/r
 import { RegisterComponent } from './components/user/register/register.component';
 import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recipe.component';
 import { StepTimerComponent } from './components/step-timer/step-timer.component';
+import { UserRecipesComponent } from './components/user/recipes/user-recipes.component';
+import { RecipeCardComponent } from './components/recipes/recipe-card/recipe-card.component';
+import { EditRecipeStepCardComponent } from './components/recipes/edit-recipe-step-card/edit-recipe-step-card.component';
+import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recipe.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,10 @@ import { StepTimerComponent } from './components/step-timer/step-timer.component
     ViewRecipeComponent,
     StepTimerComponent,
     SanitizePipe,
+    UserRecipesComponent,
+    RecipeCardComponent,
+    EditRecipeStepCardComponent,
+    EditRecipeComponent,
   ],
   imports: [
     BrowserModule,

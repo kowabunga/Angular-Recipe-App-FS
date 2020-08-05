@@ -20,34 +20,8 @@
   </a>
 
   <section class="recipe-list">
-    <mat-card
-      *ngFor="let recipe of recipes; let indexOfElement = index"
-      class="recipe-link"
-    >
-      <mat-card-title class="card-title"
-        >{{ recipe.recipeTitle }}
-      </mat-card-title>
-
-      <mat-card-content class="content-size mat-body-2 card-desc">
-        {{ recipe.recipeDescription }}
-      </mat-card-content>
-
-      <div class="recipe-card-content-image">
-        <img
-          [src]="recipe.recipeImage"
-          alt="{{ recipe.recipeDescription }} card photo"
-        />
-      </div>
-
-      <mat-card-footer class="view-recipe">
-        <a
-          mat-stroked-button
-          color="primary"
-          routerLink="/recipe/{{ recipe._id.toString() }}"
-        >
-          View Recipe
-        </a>
-      </mat-card-footer>
-    </mat-card>
+    <ng-container *ngFor="let recipe of recipes">
+      <app-recipe-card [recipe]="recipe"></app-recipe-card>
+    </ng-container>
   </section>
 </main>

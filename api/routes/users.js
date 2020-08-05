@@ -92,7 +92,7 @@ router.get('/recipes', auth, async (req, res) => {
         .json({ success: false, error: 'User has no recipes' });
     }
 
-    res.status(200).json({ success: true, recipes: recipes });
+    res.status(200).json(recipes);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');

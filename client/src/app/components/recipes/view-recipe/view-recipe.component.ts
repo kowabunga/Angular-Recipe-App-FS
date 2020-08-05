@@ -21,8 +21,13 @@ export class ViewRecipeComponent implements OnInit {
       this.id = data.id;
     });
 
-    this.recipesService.getRecipeById(this.id).subscribe((data) => {
-      this.recipe = data;
-    });
+    this.recipesService.getRecipeById(this.id).subscribe(
+      (data) => {
+        this.recipe = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

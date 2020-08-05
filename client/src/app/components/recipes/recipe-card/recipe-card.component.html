@@ -1,0 +1,44 @@
+<mat-card class="recipe-link">
+  <div class="card-icons">
+    <mat-icon
+      class="delete-recipe-icon"
+      (click)="deleteRecipe(recipe._id)"
+      *ngIf="isOwner"
+      matTooltip="Delete Recipe"
+      matTooltipPosition="above"
+      >delete</mat-icon
+    >
+    <a routerLink="/recipe/{{ recipe._id }}/edit" *ngIf="isOwner">
+      <mat-icon
+        class="edit-recipe-icon"
+        *ngIf="isOwner"
+        matTooltip="Edit Recipe"
+        matTooltipPosition="above"
+        >create</mat-icon
+      >
+    </a>
+  </div>
+
+  <mat-card-title class="card-title">{{ recipe.recipeTitle }} </mat-card-title>
+
+  <mat-card-content class="content-size mat-body-2 card-desc">
+    {{ recipe.recipeDescription }}
+  </mat-card-content>
+
+  <div class="recipe-card-content-image">
+    <img
+      [src]="recipe.recipeImage"
+      alt="{{ recipe.recipeDescription }} card photo"
+    />
+  </div>
+
+  <mat-card-footer class="view-recipe">
+    <a
+      mat-stroked-button
+      color="primary"
+      routerLink="/recipe/{{ recipe._id.toString() }}"
+    >
+      View Recipe
+    </a>
+  </mat-card-footer>
+</mat-card>

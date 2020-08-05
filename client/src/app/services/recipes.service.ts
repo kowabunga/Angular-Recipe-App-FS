@@ -38,4 +38,10 @@ export class RecipesService {
       .post<any>('http://localhost:8080/api/recipes', recipe, httpOptions)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
+
+  deleteRecipe(id: string): Observable<any> {
+    return this.http
+      .delete<Recipe>(`http://localhost:8080/api/recipes/${id}`)
+      .pipe(catchError(this.errorHandler.handleHttpError));
+  }
 }

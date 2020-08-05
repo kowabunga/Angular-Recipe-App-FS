@@ -1,16 +1,29 @@
 <mat-toolbar class="top-bar">
   <a routerLink="">Delectable Recipes</a>
   <span class="filler"></span>
-  <a routerLink="/login" mat-flat-button color="primary" *ngIf="!this.loggedIn"
-    >Login</a
-  >
-  <a
-    routerLink="/login"
-    mat-flat-button
-    color="primary"
-    *ngIf="this.loggedIn"
-    (click)="logOut()"
-    >Logout</a
-  >
+  <div class="buttons">
+    <a
+      routerLink="/login"
+      mat-flat-button
+      color="primary"
+      *ngIf="!this.loggedIn"
+      >Login</a
+    >
+    <a
+      routerLink="/user/recipes"
+      mat-flat-button
+      color="primary"
+      *ngIf="this.loggedIn"
+      >My Recipes</a
+    >
+    <a
+      routerLink="/login"
+      mat-flat-button
+      color="primary"
+      *ngIf="this.loggedIn"
+      (click)="logOut()"
+      >Logout</a
+    >
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>

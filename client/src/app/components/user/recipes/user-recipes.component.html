@@ -1,0 +1,9 @@
+<section class="recipe-list">
+  <ng-container *ngFor="let recipe of recipes">
+    <app-recipe-card
+      [recipe]="recipe"
+      [isOwner]="true"
+      (deletedId)="onDelete($event)"
+    ></app-recipe-card>
+  </ng-container>
+</section>

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandlingService } from './error-handling.service';
 import { User } from '../models/User';
+import { Recipe } from '../models/Recipe';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -51,5 +52,16 @@ export class UserService {
     if (localStorage.getItem('jwt') !== null) {
       this.changeLoginStatus(true);
     }
+  }
+
+  getUserRecipes(): Observable<Recipe[]> {
+    const headers = new HttpHeaders({
+      'x-auth-token': localStorage.getItem('jwt'),
+    });
+    return this.http
+      .get<Recipe[]>('http://localhost:8080/api/users/recipes', {
+        headers: headers,
+      })
+      .pipe(catchError(this.errorHandler.handleHttpError));
   }
 }

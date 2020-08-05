@@ -163,7 +163,7 @@ router.put(
 // @access  public
 router.delete('/:id', async (req, res) => {
   try {
-    await Recipe.findOneAndDelete({ id: req.params.id });
+    await Recipe.findOneAndDelete({ _id: req.params.id });
 
     res.status(200).json({ success: true, msg: 'Recipe deleted' });
   } catch (error) {
