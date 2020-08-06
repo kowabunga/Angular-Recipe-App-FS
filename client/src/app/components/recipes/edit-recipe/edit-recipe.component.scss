@@ -1,3 +1,51 @@
 .back-btn {
   margin: 0.8rem 0 0 0.8rem;
 }
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  min-height: 350px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 25px;
+  overflow: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgb(129, 129, 129);
+  margin-top: 10px;
+  border-radius: 5px;
+
+  mat-form-field {
+    width: 100%;
+  }
+  h2 {
+    color: #3d5afe;
+  }
+
+  .button-group {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+  }
+
+  .radio-group {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+
+    .radio-btn {
+      margin-right: 16px;
+    }
+  }
+
+  .submit-btn {
+    margin-top: 10px;
+  }
+
+  #additional-info {
+    margin-top: 10px;
+  }
+}

@@ -56,25 +56,8 @@
     <mat-hint>Add your ingredients separated by a comma ","</mat-hint>
   </mat-form-field>
 
-  <!-- Ingredients input - first step only -->
-  <mat-form-field appearance="outline" *ngIf="count > 1">
-    <mat-label>{{ "Step Timer (optional)" }}</mat-label>
-    <input
-      matInput
-      name="timer"
-      #recipeTImer="ngModel"
-      [(ngModel)]="recipeStep.timer"
-    />
-    <br />
-    <mat-hint>
-      Enter the time for this step, if required, in the following format:
-      <strong>HOURS:MINUTES</strong>
-      E.g. 15 minutes = 0:15, 1 hour 5 minutes =1:5
-    </mat-hint>
-  </mat-form-field>
-
   <!-- Recipe Step Media Input -->
-  <mat-form-field appearance="outline" *ngIf="count !== 1">
+  <mat-form-field appearance="outline" *ngIf="count !== 1" class="add-margin">
     <mat-label>{{
       firstSubmit ? "Image" : "Image or Video (optional)"
     }}</mat-label>
@@ -92,14 +75,13 @@
     }}</mat-hint>
   </mat-form-field>
 
-  <br />
-  <br />
   <!-- Media input type choice -->
   <mat-radio-group
     *ngIf="recipeStep.media !== '' && count > 0"
     name="mediaType"
     [(ngModel)]="recipeStep.mediaType"
     required
+    class="radio-group"
   >
     <mat-radio-button value="image" class="radio-btn" color="primary"
       >Image</mat-radio-button
@@ -109,8 +91,25 @@
     >
   </mat-radio-group>
 
-  <!-- Additional information -->
+  <!-- Optional timer-->
   <mat-form-field appearance="outline" *ngIf="count > 1">
+    <mat-label>{{ "Step Timer (optional)" }}</mat-label>
+    <input
+      matInput
+      name="timer"
+      #recipeTImer="ngModel"
+      [(ngModel)]="recipeStep.timer"
+    />
+    <br />
+    <mat-hint>
+      Enter the time for this step, if required, in the following format:
+      <strong>HOURS:MINUTES</strong>
+      E.g. 15 minutes = 0:15, 1 hour 5 minutes = 1:5
+    </mat-hint>
+  </mat-form-field>
+
+  <!-- Additional information -->
+  <mat-form-field appearance="outline" *ngIf="count > 1" id="additional-info">
     <mat-label>
       Additional Information (Optional)
     </mat-label>
