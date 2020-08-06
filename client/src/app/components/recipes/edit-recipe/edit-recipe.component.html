@@ -3,72 +3,24 @@
   mat-stroked-button
   color="primary"
   class="back-btn"
+  [state]="{ user: true }"
 >
   <mat-icon>arrow_back</mat-icon> Back to Recipes
 </a>
 
-<ng-container *ngIf="counter === 0; else stepForm">
-  <form class="edit-form">
-    <h2>Edit Recipe</h2>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Recipe Title</mat-label>
-      <input
-        type="text"
-        matInput
-        name="recipeTitle"
-        [(ngModel)]="recipeTitle"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Recipe Description</mat-label>
-      <input
-        type="text"
-        matInput
-        name="recipeDescription"
-        [(ngModel)]="recipeDescription"
-        required
-      />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Recipe Image</mat-label>
-      <input
-        type="text"
-        matInput
-        name="recipeImage"
-        [(ngModel)]="recipeImage"
-        required
-      />
-    </mat-form-field>
-
-    <button (click)="next()" mat-stroked-button color="primary">Next</button>
-
-    <button
-      (click)="submitEdit()"
-      mat-flat-button
-      color="primary"
-      class="submit-btn"
-    >
-      Submit Edit
-    </button>
-  </form>
-</ng-container>
-
-<ng-template #stepForm>
-  <ng-container *ngFor="let step of recipeSteps; let indx = index">
-    <form class="edit-form" *ngIf="counter - 1 === indx">
+<!-- Recipe comes in async, so outer ng-container checks if recipe exists -->
+<ng-container *ngIf="recipe">
+  <ng-container *ngIf="counter === 0; else stepForm">
+    <form class="edit-form">
       <h2>Edit Recipe</h2>
 
       <mat-form-field appearance="outline">
-        <mat-label>Step Title</mat-label>
+        <mat-label>Recipe Title</mat-label>
         <input
           type="text"
           matInput
-          name="recipeStepTitle"
-          [(ngModel)]="step.title"
+          name="recipeTitle"
+          [(ngModel)]="recipe.recipeTitle"
           required
         />
       </mat-form-field>
@@ -78,98 +30,24 @@
         <input
           type="text"
           matInput
-          name="recipeStepDirections"
-          [(ngModel)]="step.directions"
+          name="recipeDescription"
+          [(ngModel)]="recipe.recipeDescription"
           required
         />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" *ngIf="counter !== 1">
+      <mat-form-field appearance="outline">
         <mat-label>Recipe Image</mat-label>
         <input
           type="text"
           matInput
-          name="recipeStepImage"
-          [(ngModel)]="step.media"
+          name="recipeImage"
+          [(ngModel)]="recipe.recipeImage"
           required
         />
       </mat-form-field>
 
-      <mat-form-field appearance="outline" *ngIf="counter === 1">
-        <mat-label>Ingredients</mat-label>
-        <input
-          type="text"
-          matInput
-          name="ingredients"
-          [(ngModel)]="ingredients"
-          required
-        />
-      </mat-form-field>
-
-      <mat-radio-group
-        class="radio-group"
-        *ngIf="step.media !== ''"
-        name="mediaType"
-        [(ngModel)]="step.mediaType"
-        required
-      >
-        <mat-radio-button value="image" class="radio-btn" color="primary"
-          >Image</mat-radio-button
-        >
-        <mat-radio-button value="video" class="radio-btn" color="primary"
-          >Video</mat-radio-button
-        >
-      </mat-radio-group>
-
-      <mat-form-field appearance="outline" *ngIf="counter > 1">
-        <mat-label>{{ "Step Timer (optional)" }}</mat-label>
-        <input
-          matInput
-          name="timer"
-          #recipeTImer="ngModel"
-          [(ngModel)]="step.timer"
-        />
-        <br />
-        <mat-hint>
-          Enter the time for this step, if required, in the following format:
-          <strong>HOURS:MINUTES</strong>
-          E.g. 15 minutes = 0:15, 1 hour 5 minutes = 1:5
-        </mat-hint>
-      </mat-form-field>
-
-      <mat-form-field
-        appearance="outline"
-        id="additional-info"
-        *ngIf="counter > 1"
-      >
-        <mat-label>
-          Additional Information (Optional)
-        </mat-label>
-        <input
-          matInput
-          name="optional"
-          #recipeOptionalContent="ngModel"
-          [(ngModel)]="step.optional"
-        />
-        <mat-hint
-          >Add any information you think is required outside of the step's
-          directions.</mat-hint
-        >
-      </mat-form-field>
-
-      <div class="button-group">
-        <button (click)="prev()" mat-stroked-button color="primary">
-          Prev
-        </button>
-        <button
-          (click)="next()"
-          mat-stroked-button
-          color="primary"
-          *ngIf="counter < recipeSteps.length - 1 && counter !== 0"
-        >
-          Next
-        </button>
-      </div>
+      <button (click)="next()" mat-stroked-button color="primary">Next</button>
 
       <button
         (click)="submitEdit()"
@@ -181,4 +59,130 @@
       </button>
     </form>
   </ng-container>
-</ng-template>
+
+  <ng-template #stepForm>
+    <ng-container *ngFor="let step of recipe.recipeSteps; let indx = index">
+      <form class="edit-form" *ngIf="counter - 1 === indx">
+        <h2>Edit Recipe</h2>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Step Title</mat-label>
+          <input
+            type="text"
+            matInput
+            name="recipeStepTitle"
+            [(ngModel)]="step.title"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Recipe Description</mat-label>
+          <input
+            type="text"
+            matInput
+            name="recipeStepDirections"
+            [(ngModel)]="step.directions"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="counter !== 1">
+          <mat-label>Recipe Image</mat-label>
+          <input
+            type="text"
+            matInput
+            name="recipeStepImage"
+            [(ngModel)]="step.media"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="counter === 1">
+          <mat-label>Ingredients</mat-label>
+          <input
+            type="text"
+            matInput
+            name="ingredients"
+            [(ngModel)]="recipe.ingredients"
+            required
+          />
+        </mat-form-field>
+
+        <mat-radio-group
+          class="radio-group"
+          *ngIf="step.media !== ''"
+          name="mediaType"
+          [(ngModel)]="step.mediaType"
+          required
+        >
+          <mat-radio-button value="image" class="radio-btn" color="primary"
+            >Image</mat-radio-button
+          >
+          <mat-radio-button value="video" class="radio-btn" color="primary"
+            >Video</mat-radio-button
+          >
+        </mat-radio-group>
+
+        <mat-form-field appearance="outline" *ngIf="counter > 1">
+          <mat-label>{{ "Step Timer (optional)" }}</mat-label>
+          <input
+            matInput
+            name="timer"
+            #recipeTImer="ngModel"
+            [(ngModel)]="step.timer"
+          />
+          <br />
+          <mat-hint>
+            Enter the time for this step, if required, in the following format:
+            <strong>HOURS:MINUTES</strong>
+            E.g. 15 minutes = 0:15, 1 hour 5 minutes = 1:5
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          id="additional-info"
+          *ngIf="counter > 1"
+        >
+          <mat-label>
+            Additional Information (Optional)
+          </mat-label>
+          <input
+            matInput
+            name="optional"
+            #recipeOptionalContent="ngModel"
+            [(ngModel)]="step.optional"
+          />
+          <mat-hint
+            >Add any information you think is required outside of the step's
+            directions.</mat-hint
+          >
+        </mat-form-field>
+
+        <div class="button-group">
+          <button (click)="prev()" mat-stroked-button color="primary">
+            Prev
+          </button>
+          <button
+            (click)="next()"
+            mat-stroked-button
+            color="primary"
+            *ngIf="counter < recipe.recipeSteps.length - 1 && counter !== 0"
+          >
+            Next
+          </button>
+        </div>
+
+        <button
+          (click)="submitEdit()"
+          mat-flat-button
+          color="primary"
+          class="submit-btn"
+        >
+          Submit Edit
+        </button>
+      </form>
+    </ng-container>
+  </ng-template>
+</ng-container>

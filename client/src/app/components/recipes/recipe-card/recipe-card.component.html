@@ -33,11 +33,8 @@
   </div>
 
   <mat-card-footer class="view-recipe">
-    <a
-      mat-stroked-button
-      color="primary"
-      routerLink="/recipe/{{ recipe._id.toString() }}"
-    >
+    <a mat-stroked-button color="primary" (click)="routeTo()">
+      <!-- routerLink="/recipe/{{ recipe._id.toString() }}" -->
       View Recipe
     </a>
   </mat-card-footer>

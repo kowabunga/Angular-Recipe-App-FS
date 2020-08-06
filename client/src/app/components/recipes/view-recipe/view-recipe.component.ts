@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../../../models/Recipe';
 import { RecipesService } from '../../../services/recipes.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,12 +11,16 @@ import { ActivatedRoute } from '@angular/router';
 export class ViewRecipeComponent implements OnInit {
   recipe: Recipe;
   id: string;
+  fromUser: boolean = false;
+
   constructor(
     private recipesService: RecipesService,
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.fromUser = history.state.fromUser;
+
     this.activatedRoute.params.subscribe((data) => {
       this.id = data.id;
     });

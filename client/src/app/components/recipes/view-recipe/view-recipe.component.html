@@ -1,4 +1,20 @@
-<a routerLink="/" mat-stroked-button color="primary" class="back-btn">
+<a
+  routerLink="/"
+  mat-stroked-button
+  color="primary"
+  class="back-btn"
+  *ngIf="!fromUser"
+>
+  <mat-icon>{{ "arrow_back" }}</mat-icon> Back to Recipes
+</a>
+
+<a
+  routerLink="/user/recipes"
+  mat-stroked-button
+  color="primary"
+  class="back-btn"
+  *ngIf="fromUser"
+>
   <mat-icon>{{ "arrow_back" }}</mat-icon> Back to Recipes
 </a>
 
