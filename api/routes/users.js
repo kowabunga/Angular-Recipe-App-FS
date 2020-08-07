@@ -107,7 +107,7 @@ router.post(
 // @route   PUT /api/users/:id
 // @desc    Update user information by id
 // @access  Private
-router.put('/:id', auth, async (req, res) => {
+router.put('/', auth, async (req, res) => {
   try {
     let user = await User.findById(req.user.id);
 
@@ -115,17 +115,27 @@ router.put('/:id', auth, async (req, res) => {
       return status(400).json({ success: false, msg: 'User not found' });
     }
 
-    const { email, name, password } = req.body;
+    const { email, name, oldPassword, newPassword } = req.body;
 
     const updatedUser = {};
 
-    // @TODO update this to check passwords then update passwords
-
     if (name !== user.name) updatedUser.name = name;
     if (email !== user.email) updatedUser.email = email;
-    if (password && !(await bcrypt.compare(password, user.password))) {
-      const salt = await bcrypt.genSalt(10);
-      updatedUser.password = await bcrypt.hash(password, salt);
+
+    // Compare password in db to old password entered in form. Also compare new password to password in db.
+    // If old password equals db password and new password not db password, set password
+    if (oldPassword && newPassword) {
+      if (
+        (await bcrypt.compare(oldPassword, user.password)) &&
+        !(await bcrypt.compare(newPassword, user.password))
+      ) {
+        const salt = await bcrypt.genSalt(10);
+        updatedUser.password = await bcrypt.hash(newPassword, salt);
+      } else {
+        return res
+          .status(400)
+          .json({ success: false, error: 'Passwords do not match' });
+      }
     }
 
     user = await User.findByIdAndUpdate(user._id, updatedUser, { new: true });

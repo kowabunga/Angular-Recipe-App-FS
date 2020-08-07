@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Recipe } from '../../../models/Recipe';
-import { MatDialog } from '@angular/material/dialog';
 import { RecipesService } from '../../../services/recipes.service';
-import { UserService } from '../../../services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +15,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private recipeService: RecipesService,
-    private userService: UserService
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.observerArr.push(
-      this.userService.loggedIn.subscribe((data) => (this.loggedIn = data))
+      this.authService.loggedIn.subscribe((data) => (this.loggedIn = data))
     );
 
     this.observerArr.push(

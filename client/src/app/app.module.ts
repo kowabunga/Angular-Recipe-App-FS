@@ -18,7 +18,6 @@ import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recip
 import { StepTimerComponent } from './components/step-timer/step-timer.component';
 import { UserRecipesComponent } from './components/user/recipes/user-recipes.component';
 import { RecipeCardComponent } from './components/recipes/recipe-card/recipe-card.component';
-import { EditRecipeStepCardComponent } from './components/recipes/edit-recipe-step-card/edit-recipe-step-card.component';
 import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recipe.component';
 import { UserComponent } from './components/user/user/user.component';
 
@@ -35,7 +34,6 @@ import { UserComponent } from './components/user/user/user.component';
     SanitizePipe,
     UserRecipesComponent,
     RecipeCardComponent,
-    EditRecipeStepCardComponent,
     EditRecipeComponent,
     UserComponent,
   ],

@@ -7,15 +7,24 @@ import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recip
 import { AddRecipeFormComponent } from './components/recipes/add-recipe-form/add-recipe-form.component';
 import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recipe.component';
 import { UserComponent } from './components/user/user/user.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'recipe/add', component: AddRecipeFormComponent },
-  { path: 'recipe/:id/edit', component: EditRecipeComponent },
+  {
+    path: 'recipe/add',
+    canActivate: [AuthGuard],
+    component: AddRecipeFormComponent,
+  },
+  {
+    path: 'recipe/:id/edit',
+    canActivate: [AuthGuard],
+    component: EditRecipeComponent,
+  },
   { path: 'recipe/:id', component: ViewRecipeComponent },
-  { path: 'user/account', component: UserComponent },
+  { path: 'user/account', canActivate: [AuthGuard], component: UserComponent },
 ];
 
 @NgModule({

@@ -17,7 +17,6 @@
         <p class="info-name">
           <span class="color">Name:</span> {{ user.name }}
         </p>
-        <br />
         <p class="info-email">
           <span class="color">Email:</span> {{ user.email }}
         </p>
@@ -47,7 +46,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Old Password</mat-label>
         <input
-          type=password
+          type="password"
           matInput
           name="userPassword"
           [(ngModel)]="oldPassword"
@@ -57,7 +56,7 @@
       <mat-form-field appearance="outline">
         <mat-label>New Password</mat-label>
         <input
-          type=password
+          type="password"
           matInput
           name="userPassword"
           [(ngModel)]="newPassword"
@@ -77,8 +76,8 @@
   </mat-card>
 </section>
 
-<section class="recipes">
+<section class="recipes" *ngIf="userHasRecipes">
   <h2 class="mat-display-2">Your Recipes</h2>
   <mat-divider></mat-divider>
-  <app-user-recipes></app-user-recipes>
+  <app-user-recipes (hasRecipes)="userHasRecipes = $event"></app-user-recipes>
 </section>

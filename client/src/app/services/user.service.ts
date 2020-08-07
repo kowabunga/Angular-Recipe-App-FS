@@ -16,43 +16,10 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class UserService {
-  private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  loggedIn = this.isLoggedIn.asObservable();
   constructor(
     private http: HttpClient,
     private errorHandler: ErrorHandlingService
   ) {}
-
-  login(email: string, password: string): Observable<any> {
-    let user = { email, password };
-
-    return this.http
-      .post<any>('http://localhost:8080/api/auth', user, httpOptions)
-      .pipe(catchError(this.errorHandler.handleHttpError));
-  }
-
-  logout(): void {
-    this.changeLoginStatus(false);
-    localStorage.removeItem('jwt');
-  }
-
-  register(name: string, email: string, password: string): Observable<any> {
-    let user = new User(name, email, password);
-
-    return this.http
-      .post<User>('http://localhost:8080/api/users', user, httpOptions)
-      .pipe(catchError(this.errorHandler.handleHttpError));
-  }
-
-  changeLoginStatus(value: boolean): void {
-    this.isLoggedIn.next(value);
-  }
-
-  checkIfLoggedIn(): void {
-    if (localStorage.getItem('jwt') !== null) {
-      this.changeLoginStatus(true);
-    }
-  }
 
   getUserRecipes(): Observable<Recipe[]> {
     const headers = new HttpHeaders({
@@ -71,6 +38,18 @@ export class UserService {
     });
     return this.http
       .get<User>('http://localhost:8080/api/users', { headers: headers })
+      .pipe(catchError(this.errorHandler.handleHttpError));
+  }
+
+  updateUser(updatedUser: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-auth-token': localStorage.getItem('jwt'),
+    });
+    return this.http
+      .put<any>(`http://localhost:8080/api/users`, updatedUser, {
+        headers: headers,
+      })
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 }

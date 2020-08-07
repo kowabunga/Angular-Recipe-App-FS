@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Recipe } from 'src/app/models/Recipe';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,13 +9,18 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserRecipesComponent implements OnInit {
   recipes: Recipe[];
-
+  @Output() hasRecipes: EventEmitter<boolean> = new EventEmitter();
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getUserRecipes().subscribe(
       (data) => {
         this.recipes = data;
+        if (this.recipes.length > 0) {
+          this.hasRecipes.emit(true);
+        } else {
+          this.hasRecipes.emit(false);
+        }
       },
       (error) => {
         console.log(error);

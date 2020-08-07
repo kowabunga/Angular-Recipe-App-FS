@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,15 +10,15 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   loggedIn: boolean;
   active: boolean = false;
-  constructor(private user: UserService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.user.loggedIn.subscribe((data) => (this.loggedIn = data));
-    this.user.checkIfLoggedIn();
+    this.authService.loggedIn.subscribe((data) => (this.loggedIn = data));
+    this.authService.checkIfLoggedIn();
   }
 
   logOut(): void {
-    this.user.logout();
+    this.authService.logout();
     this.active = false;
     this.router.navigate(['/']);
   }
