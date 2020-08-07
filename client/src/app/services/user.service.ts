@@ -64,4 +64,13 @@ export class UserService {
       })
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
+
+  getUser(): Observable<User> {
+    const headers = new HttpHeaders({
+      'x-auth-token': localStorage.getItem('jwt'),
+    });
+    return this.http
+      .get<User>('http://localhost:8080/api/users', { headers: headers })
+      .pipe(catchError(this.errorHandler.handleHttpError));
+  }
 }

@@ -1,27 +1,29 @@
-<div class="catchy-intro">
-  <h1 class="home-title mat-display-2">
-    All for your enjoyment.
-  </h1>
-  <p class="home-desc mat-headline">
-    Try some of our favorites below. You can even add your own!
-  </p>
-</div>
+<main class="container">
+  <div class="catchy-intro">
+    <h1 class="home-title mat-display-2">
+      All for your enjoyment.
+    </h1>
+    <p class="home-desc mat-headline">
+      Try some of our favorites below. You can even add your own!
+    </p>
+  </div>
 
-<main class="home-page-main">
-  <!-- Redo this into add-recipe page link -->
-  <a
-    mat-stroked-button
-    class="add-recipe-btn"
-    color="primary"
-    routerLink="/recipe/add"
-    *ngIf="loggedIn"
-  >
-    <mat-icon>{{ "add" }}</mat-icon> Add Recipe
-  </a>
+  <div class="home-page-main">
+    <!-- Redo this into add-recipe page link -->
+    <a
+      mat-stroked-button
+      class="add-recipe-btn"
+      color="primary"
+      routerLink="/recipe/add"
+      *ngIf="loggedIn"
+    >
+      <mat-icon>{{ "add" }}</mat-icon> Add Recipe
+    </a>
 
-  <section class="recipe-list">
-    <ng-container *ngFor="let recipe of recipes">
-      <app-recipe-card [recipe]="recipe"></app-recipe-card>
-    </ng-container>
-  </section>
+    <section class="recipe-list">
+      <ng-container *ngFor="let recipe of recipes">
+        <app-recipe-card [recipe]="recipe"></app-recipe-card>
+      </ng-container>
+    </section>
+  </div>
 </main>

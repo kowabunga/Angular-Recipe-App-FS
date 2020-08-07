@@ -1,6 +1,6 @@
 <div class="container">
-  <form (submit)="onRegisterSubmit()" class="login-form">
-    <h1 class="login-form-title">Register</h1>
+  <form (submit)="onRegisterSubmit()" class="register-form">
+    <h1 class="register-form-title">Register</h1>
 
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Name</mat-label>
@@ -37,12 +37,12 @@
         minlength="6"
       />
     </mat-form-field>
-    <p class="login-error" *ngIf="error">Error: {{ error }}</p>
+    <p class="register-error" *ngIf="error">Error: {{ error }}</p>
     <button type="submit" mat-flat-button color="primary" class="form-submit">
       Register
     </button>
-    <p class="login">
-      Already have an account? <a routerLink="/login">Login</a>
+    <p class="register">
+      Already have an account? <a routerLink="/register">register</a>
     </p>
   </form>
 </div>

@@ -6,10 +6,35 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const auth = require('../../middleware/auth');
 
+// @route   Get api/user
+// @desc    Get user's info
+// @access  private
+
+router.get('/', auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  try {
+    const user = await User.findById({ _id: req.user.id }).select('-password');
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, msg: 'User does not exist' });
+    }
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route   POST api/users
 // @desc    Create user
 // @access  public
-
 router.post(
   '/',
   [
@@ -78,6 +103,39 @@ router.post(
     }
   }
 );
+
+// @route   PUT /api/users/:id
+// @desc    Update user information by id
+// @access  Private
+router.put('/:id', auth, async (req, res) => {
+  try {
+    let user = await User.findById(req.user.id);
+
+    if (!user) {
+      return status(400).json({ success: false, msg: 'User not found' });
+    }
+
+    const { email, name, password } = req.body;
+
+    const updatedUser = {};
+
+    // @TODO update this to check passwords then update passwords
+
+    if (name !== user.name) updatedUser.name = name;
+    if (email !== user.email) updatedUser.email = email;
+    if (password && !(await bcrypt.compare(password, user.password))) {
+      const salt = await bcrypt.genSalt(10);
+      updatedUser.password = await bcrypt.hash(password, salt);
+    }
+
+    user = await User.findByIdAndUpdate(user._id, updatedUser, { new: true });
+
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 // @route   GET api/users/recipes
 // @desc    Get recipes for by userId

@@ -5,8 +5,8 @@ import { HomeComponent } from './components/layout/home/home.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { ViewRecipeComponent } from './components/recipes/view-recipe/view-recipe.component';
 import { AddRecipeFormComponent } from './components/recipes/add-recipe-form/add-recipe-form.component';
-import { UserRecipesComponent } from './components/user/recipes/user-recipes.component';
 import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recipe.component';
+import { UserComponent } from './components/user/user/user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'recipe/add', component: AddRecipeFormComponent },
   { path: 'recipe/:id/edit', component: EditRecipeComponent },
   { path: 'recipe/:id', component: ViewRecipeComponent },
-  { path: 'user/recipes', component: UserRecipesComponent },
+  { path: 'user/account', component: UserComponent },
 ];
 
 @NgModule({

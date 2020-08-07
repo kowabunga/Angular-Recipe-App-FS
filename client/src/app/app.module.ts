@@ -20,6 +20,7 @@ import { UserRecipesComponent } from './components/user/recipes/user-recipes.com
 import { RecipeCardComponent } from './components/recipes/recipe-card/recipe-card.component';
 import { EditRecipeStepCardComponent } from './components/recipes/edit-recipe-step-card/edit-recipe-step-card.component';
 import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recipe.component';
+import { UserComponent } from './components/user/user/user.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recip
     RecipeCardComponent,
     EditRecipeStepCardComponent,
     EditRecipeComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

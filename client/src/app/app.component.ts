@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   loggedIn: boolean;
+  active: boolean = false;
   constructor(private user: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
 
   logOut(): void {
     this.user.logout();
+    this.active = false;
     this.router.navigate(['/']);
   }
 }

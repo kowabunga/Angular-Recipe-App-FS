@@ -1,25 +1,27 @@
-<a
-  routerLink="/"
-  mat-stroked-button
-  color="primary"
-  class="back-btn"
-  *ngIf="!fromUser"
->
-  <mat-icon>{{ "arrow_back" }}</mat-icon> Back to Recipes
-</a>
+<main class="container">
+  <a
+    routerLink="/"
+    mat-stroked-button
+    color="primary"
+    class="back-btn"
+    *ngIf="!fromUser"
+  >
+    <mat-icon>{{ "arrow_back" }}</mat-icon> Back to Recipes
+  </a>
 
-<a
-  routerLink="/user/recipes"
-  mat-stroked-button
-  color="primary"
-  class="back-btn"
-  *ngIf="fromUser"
->
-  <mat-icon>{{ "arrow_back" }}</mat-icon> Back to Recipes
-</a>
+  <a
+    routerLink="/user/recipes"
+    mat-stroked-button
+    color="primary"
+    class="back-btn"
+    *ngIf="fromUser"
+  >
+    <mat-icon>{{ "arrow_back" }}</mat-icon> Back to Recipes
+  </a>
 
-<!-- Need to wait for recipe to arrive - i.e. not undefined -->
-<app-recipe-step-card
-  *ngIf="recipe !== undefined"
-  [recipe]="recipe"
-></app-recipe-step-card>
+  <!-- Need to wait for recipe to arrive - i.e. not undefined -->
+  <app-recipe-step-card
+    *ngIf="recipe !== undefined"
+    [recipe]="recipe"
+  ></app-recipe-step-card>
+</main>

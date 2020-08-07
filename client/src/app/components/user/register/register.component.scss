@@ -4,7 +4,7 @@
   justify-content: center;
   width: 100%;
 
-  .login {
+  .register {
     &-form {
       display: flex;
       align-items: center;
@@ -39,7 +39,7 @@
       color: crimson;
     }
   }
-  .login {
+  .register {
     margin-top: 10px;
     font-size: 1rem;
     a {
@@ -48,6 +48,26 @@
       text-decoration: none;
       &:hover {
         text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    .register {
+      &-form {
+        width: 65%;
+      }
+    }
+  }
+}
+
+@media (max-width: 590px) {
+  .container {
+    .register {
+      &-form {
+        width: 80%;
       }
     }
   }

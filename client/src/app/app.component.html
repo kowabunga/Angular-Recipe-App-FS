@@ -1,21 +1,26 @@
 <mat-toolbar class="top-bar">
   <a routerLink="">Delectable Recipes</a>
   <span class="filler"></span>
-  <div class="buttons">
+  <div class="buttons" [ngClass]="{ show: active }">
     <a
       routerLink="/login"
       mat-flat-button
       color="primary"
       *ngIf="!this.loggedIn"
+      (click)="active = false"
       >Login</a
     >
+
     <a
-      routerLink="/user/recipes"
+      routerLink="/user/account"
       mat-flat-button
       color="primary"
       *ngIf="this.loggedIn"
-      >My Recipes</a
+      (click)="active = false"
     >
+      My Account</a
+    >
+
     <a
       routerLink="/login"
       mat-flat-button
@@ -25,5 +30,6 @@
       >Logout</a
     >
   </div>
+  <mat-icon class="show-hide-buttons" (click)="active = !active">menu</mat-icon>
 </mat-toolbar>
 <router-outlet></router-outlet>
