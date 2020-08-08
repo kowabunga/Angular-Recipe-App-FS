@@ -42,7 +42,7 @@ export class EditRecipeComponent implements OnInit {
     this.recipeService.editRecipe(this.recipe, this.id).subscribe(
       (data) => {
         if (data.success) {
-          this.route.navigate(['/user/recipes']);
+          this.route.navigate(['/user/account']);
         }
       },
       (error) => {
