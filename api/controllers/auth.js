@@ -77,29 +77,26 @@ exports.sendResetLink = async (req, res) => {
         if (error) throw error;
         try {
           const transporter = nodemailer.createTransport({
-            host: 'smtp-mail.outlook.com',
+            host: process.env.SMTP_HOST,
             secureConnection: false,
-            port: 587,
+            port: process.env.SMPT_PORT,
             tls: {
               ciphers: 'SSLv3',
             },
             auth: {
-              user: 'delectablerecipes@outlook.com',
+              user: process.env.SMPT_USERNAME,
               pass: 'zajta2-pafjiG-muhmyt',
             },
           });
 
           let info = await transporter.sendMail({
-            from: '"Delectable Recipes" <delectablerecipes@outlook.com>', // outlook needs to be same.
+            from: `"Delectable Recipes" <${process.env.SMPT_USERNAME}>`, // outlook needs to be same.
             to: 'anthony.siletti@gmail.com', // list of receivers
             subject: 'Forgot Password - Delectable Recipes', // Subject line
             text: `The reset link will be valid for 15 minutes only. If the below link does not work, copy and paste this link in to your browser. http://localhost:4200/passwordreset/${token}`, // plain text body
             html: `
-              <p>
-                The reset link will be valid for 15 minutes only.
-                </br>
-                Reset your password <a href="http://localhost:4200/passwordreset/${token}">here</a>
-              </p>
+              <p>The reset link will be valid for 15 minutes only.</p>
+              <p>Reset your password <a href="http://localhost:4200/passwordreset/${token}">here</a></p>
             `, // html body
           });
 
