@@ -51,6 +51,13 @@
       }
     }
   }
+
+  .forgot-password {
+    color: #3d5afe;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 @media (max-width: 800px) {

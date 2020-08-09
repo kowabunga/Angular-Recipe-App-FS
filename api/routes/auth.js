@@ -15,14 +15,14 @@ router.post(
   login
 );
 
-// @route   GET /api/auth/reset
-// @desc    Create and send reset password link to email
+// @route   POST /api/auth/reset
+// @desc    Create reset token and send reset email
 // @access  Public
-router.get('/reset', sendResetLink);
+router.post('/reset', sendResetLink);
 
-// @route   PATCH /api/auth/reset/:jwt
+// @route   PATCH /api/auth/reset/:token
 // @desc    Reset user password
 // @access  Public
-router.patch('/reset/:jwt', resetPassword);
+router.patch('/reset/:token', resetPassword);
 
 module.exports = router;

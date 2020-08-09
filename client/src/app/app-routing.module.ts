@@ -8,6 +8,8 @@ import { AddRecipeFormComponent } from './components/recipes/add-recipe-form/add
 import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recipe.component';
 import { UserComponent } from './components/user/user/user.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ResetPasswordComponent } from './components/user/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +27,8 @@ const routes: Routes = [
   },
   { path: 'recipe/:id', component: ViewRecipeComponent },
   { path: 'user/account', canActivate: [AuthGuard], component: UserComponent },
+  { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'passwordreset/:token', component: ResetPasswordComponent },
 ];
 
 @NgModule({

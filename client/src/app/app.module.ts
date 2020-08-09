@@ -20,6 +20,8 @@ import { UserRecipesComponent } from './components/user/recipes/user-recipes.com
 import { RecipeCardComponent } from './components/recipes/recipe-card/recipe-card.component';
 import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recipe.component';
 import { UserComponent } from './components/user/user/user.component';
+import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/user/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { UserComponent } from './components/user/user/user.component';
     RecipeCardComponent,
     EditRecipeComponent,
     UserComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

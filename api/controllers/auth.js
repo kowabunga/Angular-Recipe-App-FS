@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const { validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 exports.login = async (req, res) => {
   const errors = validationResult(req);
@@ -55,57 +56,33 @@ exports.login = async (req, res) => {
 
 exports.sendResetLink = async (req, res) => {
   try {
-    const email = req.body.email;
-    const user = await User.findOne({ email: email }).select('-password');
+    const user = await User.findOne({ email: req.body.email }).select(
+      '-password'
+    );
 
     if (!user) {
       return res
         .status(400)
         .json({ success: false, msg: 'No user with that email' });
     }
-    const payload = {
-      email: user.email,
-    };
 
-    await jwt.sign(
-      payload,
-      process.env.SECRET,
+    // Generate token
+    const resetToken = crypto.randomBytes(20).toString('hex');
+
+    // Hash token and save to user
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex');
+
+    const resetPasswordExp = Date.now() + 15 * 60 * 1000;
+
+    await user.updateOne(
       {
-        expiresIn: Date.now() + '15m',
+        passwordResetToken: hashedToken,
+        passwordResetTokenExpiry: resetPasswordExp,
       },
-      async (error, token) => {
-        if (error) throw error;
-        try {
-          const transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            secureConnection: false,
-            port: process.env.SMPT_PORT,
-            tls: {
-              ciphers: 'SSLv3',
-            },
-            auth: {
-              user: process.env.SMPT_USERNAME,
-              pass: 'zajta2-pafjiG-muhmyt',
-            },
-          });
-
-          let info = await transporter.sendMail({
-            from: `"Delectable Recipes" <${process.env.SMPT_USERNAME}>`, // outlook needs to be same.
-            to: 'anthony.siletti@gmail.com', // list of receivers
-            subject: 'Forgot Password - Delectable Recipes', // Subject line
-            text: `The reset link will be valid for 15 minutes only. If the below link does not work, copy and paste this link in to your browser. http://localhost:4200/passwordreset/${token}`, // plain text body
-            html: `
-              <p>The reset link will be valid for 15 minutes only.</p>
-              <p>Reset your password <a href="http://localhost:4200/passwordreset/${token}">here</a></p>
-            `, // html body
-          });
-
-          console.log('Message sent: %s', info.messageId);
-          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-        } catch (error) {
-          console.error(error);
-        }
-      }
+      sendEmail(req, user, resetToken)
     );
 
     res.status(200).json(user);
@@ -117,30 +94,91 @@ exports.sendResetLink = async (req, res) => {
 
 exports.resetPassword = async (req, res) => {
   try {
-    const jwt = req.params.jwt;
+    const resetToken = req.params.token;
+    const hashedToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex');
 
-    // Verify and extract info from jwt
-    const isVerified = await jwt.verify(jwt, process.env.SECRET);
+    // Check for user and see if reset token is not expired
+    const user = await User.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetTokenExpiry: { $gt: Date.now() },
+    });
 
-    if (isVerified) {
-      const user = await User.findOne({ email: isVerified.email });
-
-      let password = req.body.newPassword;
-
-      const salt = bcrypt.genSalt(10);
-      password = await bcrypt.hash(password, salt);
-
-      await User.findOneAndUpdate(
-        { email: user.email },
-        { $set: { password: password } }
-      );
-
-      return res.status(200).json({ success: true, msg: 'Password Updated' });
-    } else {
-      res.status(400).json({ success: false, error: 'Invalid token' });
+    if (!user) {
+      return res.status(400).json({ success: false, msg: 'Token expired' });
     }
+
+    // Get new password, hash, and store in db. Clear out reset token and expiry
+    let password = req.body.password;
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+
+    await user.updateOne({
+      password: password,
+      passwordResetToken: undefined,
+      passwordResetTokenExpiry: undefined,
+    });
+
+    // Create and send new token so user will be automatically logged in
+    const payload = {
+      user: {
+        id: user._id,
+      },
+    };
+
+    jwt.sign(
+      payload,
+      process.env.SECRET,
+      { expiresIn: Date.now() + '7d' },
+      (error, token) => {
+        if (error) throw error;
+        return res
+          .status(200)
+          .json({ success: true, msg: 'Password Updated', token: token });
+      }
+    );
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');
   }
 };
+
+async function sendEmail(req, user, token) {
+  console.log(`email Token: ${token}`);
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      secureConnection: false,
+      port: process.env.SMPT_PORT,
+      tls: {
+        ciphers: 'SSLv3',
+      },
+      auth: {
+        user: process.env.SMPT_USERNAME,
+        pass: process.env.SMPT_PASSWORD,
+      },
+    });
+
+    const url = `http://localhost:4200/passwordreset/${token}`;
+
+    await transporter.sendMail({
+      from: `"Delectable Recipes" <${process.env.SMPT_USERNAME}>`, // outlook needs to be same.
+      to: `${user.email}`, // list of receivers
+      subject: 'Forgot Password - Delectable Recipes', // Subject line
+      text: `The reset link will be valid for 15 minutes only. If the below link does not work, copy and paste this link in to your browser. ${url}`, // plain text body
+      html: `
+              <p>The reset link will be valid for 15 minutes only.</p>
+              <p>Reset your password <a href="${url}">here</a></p>
+              <p>If the above link does not work, copy and paste this link into your browser. ${url} </p>
+            `, // html body
+    });
+  } catch (error) {
+    console.error(error);
+    await user.updateOne({
+      passwordResetToken: undefined,
+      passwordResetTokenExpiry: undefined,
+    });
+  }
+}

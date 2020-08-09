@@ -53,4 +53,26 @@ export class AuthService {
       this.changeLoginStatus(true);
     }
   }
+
+  requestResetPasswordLink(email: string): Observable<any> {
+    return this.http
+      .post<any>(
+        `http://localhost:8080/api/auth/reset`,
+        {
+          email: email,
+        },
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler.handleHttpError));
+  }
+
+  resetPassword(password: string, token: string): Observable<any> {
+    return this.http
+      .patch<any>(
+        `http://localhost:8080/api/auth/reset/${token}`,
+        { password: password },
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler.handleHttpError));
+  }
 }
