@@ -9,12 +9,12 @@ dotenv.config({ path: './config/config.env' });
 connectDb();
 
 // Middleware
-// Body parser
 const app = express();
 
 // CORS
 app.use(cors());
 
+// Body parser
 app.use(express.json({ extended: false }));
 
 // API Routes - Recipes
