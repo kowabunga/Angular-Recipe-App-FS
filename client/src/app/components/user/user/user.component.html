@@ -1,83 +1,85 @@
-<a routerLink="/" mat-stroked-button color="primary" class="back-btn">
-  <mat-icon>arrow_back</mat-icon>Back to Recipes
-</a>
+<main class="background-color-setter">
+  <a routerLink="/" mat-stroked-button color="primary" class="back-btn">
+    <mat-icon>arrow_back</mat-icon>Back to Recipes
+  </a>
 
-<section class="container">
-  <mat-card *ngIf="user && !edit" class="user-info">
-    <button id="edit-info" (click)="edit = true">
-      Edit Info <mat-icon>create</mat-icon>
-    </button>
-    <mat-card-title class="header mat-display-2"
-      >Welcome <span class="color">{{ user.name }}</span></mat-card-title
-    >
+  <section class="container">
+    <mat-card *ngIf="user && !edit" class="user-info">
+      <button id="edit-info" (click)="edit = true">
+        Edit Info <mat-icon>create</mat-icon>
+      </button>
+      <mat-card-title class="header mat-display-2"
+        >Welcome <span class="color">{{ user.name }}</span></mat-card-title
+      >
+      <mat-divider></mat-divider>
+      <mat-card-content class="content-size mat-body-2 card-desc user-info">
+        <h2 class="mat-title">Account Details:</h2>
+        <div class="info">
+          <p class="info-name">
+            <span class="color">Name:</span> {{ user.name }}
+          </p>
+          <p class="info-email">
+            <span class="color">Email:</span> {{ user.email }}
+          </p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="user && edit" class="edit-user">
+      <h2 class="mat-display-2">Edit Information</h2>
+      <mat-divider></mat-divider>
+      <form class="edit-user-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput name="userName" [(ngModel)]="user.name" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            name="userEmail"
+            [(ngModel)]="user.email"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Old Password</mat-label>
+          <input
+            type="password"
+            matInput
+            name="userPassword"
+            [(ngModel)]="oldPassword"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>New Password</mat-label>
+          <input
+            type="password"
+            matInput
+            name="userPassword"
+            [(ngModel)]="newPassword"
+          />
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-stroked-button color="primary" (click)="edit = false">
+            Cancel
+          </button>
+
+          <button mat-flat-button color="primary" (click)="onSubmit()">
+            Save
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </section>
+
+  <section class="recipes" *ngIf="userHasRecipes">
+    <h2 class="mat-display-2">Your Recipes</h2>
     <mat-divider></mat-divider>
-    <mat-card-content class="content-size mat-body-2 card-desc user-info">
-      <h2 class="mat-title">Account Details:</h2>
-      <div class="info">
-        <p class="info-name">
-          <span class="color">Name:</span> {{ user.name }}
-        </p>
-        <p class="info-email">
-          <span class="color">Email:</span> {{ user.email }}
-        </p>
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card *ngIf="user && edit" class="edit-user">
-    <h2 class="mat-display-2">Edit Information</h2>
-    <mat-divider></mat-divider>
-    <form class="edit-user-form">
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input type="text" matInput name="userName" [(ngModel)]="user.name" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input
-          type="email"
-          matInput
-          name="userEmail"
-          [(ngModel)]="user.email"
-        />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Old Password</mat-label>
-        <input
-          type="password"
-          matInput
-          name="userPassword"
-          [(ngModel)]="oldPassword"
-        />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>New Password</mat-label>
-        <input
-          type="password"
-          matInput
-          name="userPassword"
-          [(ngModel)]="newPassword"
-        />
-      </mat-form-field>
-
-      <div class="button-group">
-        <button mat-stroked-button color="primary" (click)="edit = false">
-          Cancel
-        </button>
-
-        <button mat-flat-button color="primary" (click)="onSubmit()">
-          Save
-        </button>
-      </div>
-    </form>
-  </mat-card>
-</section>
-
-<section class="recipes" *ngIf="userHasRecipes">
-  <h2 class="mat-display-2">Your Recipes</h2>
-  <mat-divider></mat-divider>
-  <app-user-recipes (hasRecipes)="userHasRecipes = $event"></app-user-recipes>
-</section>
+    <app-user-recipes (hasRecipes)="userHasRecipes = $event"></app-user-recipes>
+  </section>
+</main>

@@ -1,110 +1,126 @@
-.back-btn {
-  margin: 0.8rem 0 0.8rem 0.8rem;
-}
+.background-color-setter {
+  background-color: rgb(243, 243, 243);
 
-.mat-display-2 {
-  margin-bottom: 1rem;
-}
-
-.container {
-  margin: 0 auto;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .user {
-    &-info {
-      width: 75%;
-      background-color: #fff;
-      border-radius: 4px;
-      padding: 1rem;
-
-      .color {
-        color: #3d5afe;
-        margin-right: 1.5rem;
-      }
-
-      .header {
-        color: #302e41;
-        margin-bottom: 1rem;
-      }
-
-      .info {
-        &-name,
-        &-email {
-          padding: 10px;
-          border-radius: 4px;
-          font-size: 1rem;
-        }
-      }
-
-      #edit-info {
-        margin-left: 80%;
-        width: 123px;
-        font-size: 1.25rem;
-        background: transparent;
-        border: none;
-        padding: 10px;
-
-        .color {
-          font-size: 1.25rem;
-        }
-
-        &:hover {
-          color: #3d5afe;
-          text-decoration: underline;
-          cursor: pointer;
-        }
-      }
-    }
+  .back-btn {
+    margin: 0.8rem 0 0.8rem 0.8rem;
   }
-}
 
-.edit-user {
-  width: 75%;
-  background-color: #fff;
-  border-radius: 4px;
-  padding: 1rem;
+  .mat-display-2 {
+    margin-bottom: 1rem;
+  }
 
-  &-form {
+  .container {
+    margin: 0 auto;
+    width: 80%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    padding: 25px;
-    overflow: auto;
-    background-color: #fff;
-    margin-top: 10px;
-    border-radius: 5px;
+    justify-content: center;
 
-    mat-form-field {
-      width: 100%;
-    }
+    .user {
+      &-info {
+        width: 75%;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 1rem;
 
-    .button-group {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 100%;
+        .color {
+          color: #3d5afe;
+          margin-right: 1.5rem;
+        }
+
+        .header {
+          color: #302e41;
+          margin-bottom: 1rem;
+        }
+
+        .info {
+          &-name,
+          &-email {
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 1rem;
+          }
+        }
+
+        #edit-info {
+          margin-left: calc(100% - 123px);
+          width: 123px;
+          font-size: 1.25rem;
+          background: transparent;
+          border: none;
+          padding: 10px;
+
+          .color {
+            font-size: 1.25rem;
+          }
+
+          &:hover {
+            color: #3d5afe;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
-}
 
-.recipes {
-  margin-top: 1rem;
-  width: 100%;
-  background-color: #fff;
-  padding: 1rem;
+  .edit-user {
+    width: 75%;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 1rem;
+
+    &-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      padding: 25px;
+      overflow: auto;
+      background-color: #fff;
+      margin-top: 10px;
+      border-radius: 5px;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+      .button-group {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+      }
+    }
+  }
+
+  .recipes {
+    margin-top: 1rem;
+    width: 100%;
+    background-color: #fff;
+    padding: 1rem;
+  }
 }
 
 @media (max-width: 1100px) {
-  .container {
-    .user {
-      &-info {
+  .background-color-setter {
+    .container {
+      .user {
+        &-info {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .background-color-setter {
+    .container {
+      .edit-user {
         width: 100%;
       }
     }
