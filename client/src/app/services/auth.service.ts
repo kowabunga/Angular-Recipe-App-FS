@@ -27,7 +27,7 @@ export class AuthService {
     let user = { email, password };
 
     return this.http
-      .post<any>('http://localhost:8080/api/auth', user, httpOptions)
+      .post<any>('api/auth', user, httpOptions)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -40,7 +40,7 @@ export class AuthService {
     let user = new User(name, email, password);
 
     return this.http
-      .post<User>('http://localhost:8080/api/users', user, httpOptions)
+      .post<User>('api/users', user, httpOptions)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -57,7 +57,7 @@ export class AuthService {
   requestResetPasswordLink(email: string): Observable<any> {
     return this.http
       .post<any>(
-        `http://localhost:8080/api/auth/reset`,
+        `api/auth/reset`,
         {
           email: email,
         },
@@ -69,7 +69,7 @@ export class AuthService {
   resetPassword(password: string, token: string): Observable<any> {
     return this.http
       .patch<any>(
-        `http://localhost:8080/api/auth/reset/${token}`,
+        `api/auth/reset/${token}`,
         { password: password },
         httpOptions
       )
