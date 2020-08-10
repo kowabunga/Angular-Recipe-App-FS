@@ -132,22 +132,23 @@
     type="submit"
     [disabled]="!addForm.valid"
     color="primary"
+    class="add-step-btn"
   >
     {{ firstSubmit ? "Add Description" : "Add Step " }}
   </button>
-
-  <div *ngIf="count > 2" class="button-div">
-    <span class="finished"
-      >Finished? Make sure to add the current step first if necessary!</span
-    >
-    <button
-      class="submit-btn"
-      color="primary"
-      mat-stroked-button
-      (click)="addRecipe()"
-      [disabled]="count < 3"
-    >
-      Submit Recipe
-    </button>
-  </div>
 </form>
+
+<div class="button-div" *ngIf="count > 2">
+  <p class="finished">
+    Finished? Make sure to add the current step first if necessary!
+  </p>
+  <button
+    class="submit-btn"
+    color="primary"
+    mat-stroked-button
+    (click)="addRecipe()"
+    [disabled]="count < 3"
+  >
+    Submit Recipe
+  </button>
+</div>

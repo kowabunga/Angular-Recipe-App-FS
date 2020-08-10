@@ -12,6 +12,7 @@
   box-shadow: 0 0 10px rgb(129, 129, 129);
   margin-top: 10px;
   border-radius: 5px;
+  position: relative;
 
   mat-form-field {
     width: 100%;
@@ -21,8 +22,7 @@
   }
 
   .add-step-btn {
-    background-color: #3d5afe;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .radio-group {
@@ -42,30 +42,43 @@
   .add-margin {
     margin-bottom: 10px;
   }
-
-  .button-div {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .finished {
-      font-size: 1rem;
-      letter-spacing: 1px;
-      font-weight: 300;
-    }
-
-    .submit-btn {
-      margin-top: 10px;
-    }
-  }
 }
 
 .back-btn {
   margin: 0.8rem 0 0 0.8rem;
 }
 
+.button-div {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  width: 50%;
+  background-color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  padding: 5px;
+  box-shadow: 0 0 10px rgb(129, 129, 129);
+
+  .finished {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+}
+
 @media (max-width: 800px) {
+  .button-div,
   .add-recipe-form {
+    width: 75%;
+  }
+}
+
+@media (max-width: 590px) {
+  .button-div {
     width: 75%;
   }
 }

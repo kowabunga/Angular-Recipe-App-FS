@@ -39,6 +39,7 @@ export class EditRecipeComponent implements OnInit {
   }
 
   submitEdit(): void {
+    console.log(this.recipe);
     this.recipeService.editRecipe(this.recipe, this.id).subscribe(
       (data) => {
         if (data.success) {

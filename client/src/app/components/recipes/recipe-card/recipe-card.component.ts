@@ -29,14 +29,16 @@ export class RecipeCardComponent implements OnInit {
 
   // Delete recipe and emit id so user recipe component can catch id and delete from list
   deleteRecipe(id: string): void {
-    this.recipeService.deleteRecipe(id).subscribe(
-      (data) => {
-        console.log(data.msg);
-        this.deletedId.emit(id);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (confirm('Are you sure you want to delete this recipe?')) {
+      this.recipeService.deleteRecipe(id).subscribe(
+        (data) => {
+          console.log(data.msg);
+          this.deletedId.emit(id);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 }
