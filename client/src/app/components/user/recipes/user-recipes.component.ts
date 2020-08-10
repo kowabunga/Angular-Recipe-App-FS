@@ -31,5 +31,8 @@ export class UserRecipesComponent implements OnInit {
   // On delete, filter deleted recipe from list
   onDelete(id): void {
     this.recipes = this.recipes.filter((recipe) => recipe._id !== id);
+    if (this.recipes.length === 0) {
+      this.hasRecipes.emit(false);
+    }
   }
 }

@@ -5,13 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandlingService } from '../services/error-handling.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'x-auth-token': localStorage.getItem('jwt'),
-  }),
-};
-
 @Injectable({
   providedIn: 'root',
 })
@@ -34,18 +27,27 @@ export class RecipesService {
   }
 
   addRecipe(recipe: Recipe): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-auth-token': localStorage.getItem('jwt'),
+    });
+
     return this.http
-      .post<Recipe>('http://localhost:8080/api/recipes', recipe, httpOptions)
+      .post<Recipe>('http://localhost:8080/api/recipes', recipe, {
+        headers: headers,
+      })
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
   editRecipe(recipe: Recipe, id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-auth-token': localStorage.getItem('jwt'),
+    });
     return this.http
-      .put<Recipe>(
-        `http://localhost:8080/api/recipes/${id}`,
-        recipe,
-        httpOptions
-      )
+      .put<Recipe>(`http://localhost:8080/api/recipes/${id}`, recipe, {
+        headers: headers,
+      })
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
