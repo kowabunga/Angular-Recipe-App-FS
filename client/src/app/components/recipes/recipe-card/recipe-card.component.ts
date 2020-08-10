@@ -32,7 +32,6 @@ export class RecipeCardComponent implements OnInit {
     if (confirm('Are you sure you want to delete this recipe?')) {
       this.recipeService.deleteRecipe(id).subscribe(
         (data) => {
-          console.log(data.msg);
           this.deletedId.emit(id);
         },
         (error) => {
