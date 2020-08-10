@@ -16,13 +16,13 @@ export class RecipesService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>('http://localhost:8080/api/recipes')
+      .get<Recipe[]>('api/recipes')
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
   getRecipeById(id: string): Observable<Recipe> {
     return this.http
-      .get<Recipe>(`http://localhost:8080/api/recipes/${id}`)
+      .get<Recipe>(`api/recipes/${id}`)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -33,7 +33,7 @@ export class RecipesService {
     });
 
     return this.http
-      .post<Recipe>('http://localhost:8080/api/recipes', recipe, {
+      .post<Recipe>('api/recipes', recipe, {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));
@@ -45,7 +45,7 @@ export class RecipesService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .put<Recipe>(`http://localhost:8080/api/recipes/${id}`, recipe, {
+      .put<Recipe>(`api/recipes/${id}`, recipe, {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));
@@ -53,7 +53,7 @@ export class RecipesService {
 
   deleteRecipe(id: string): Observable<any> {
     return this.http
-      .delete<Recipe>(`http://localhost:8080/api/recipes/${id}`)
+      .delete<Recipe>(`api/recipes/${id}`)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 }
