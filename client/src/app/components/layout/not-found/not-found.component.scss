@@ -1,0 +1,27 @@
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.8);
+
+  h1 {
+    font-size: 4rem;
+    color: #3d5afe;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    button {
+      margin: 1rem 0;
+      transform: scale(1.2);
+    }
+  }
+}

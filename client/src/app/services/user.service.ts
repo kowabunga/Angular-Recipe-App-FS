@@ -26,7 +26,7 @@ export class UserService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .get<Recipe[]>('http://localhost:8080/api/users/recipes', {
+      .get<Recipe[]>('api/users/recipes', {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));
@@ -37,7 +37,7 @@ export class UserService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .get<User>('http://localhost:8080/api/users', { headers: headers })
+      .get<User>('api/users', { headers: headers })
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -47,7 +47,7 @@ export class UserService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .put<any>(`http://localhost:8080/api/users`, updatedUser, {
+      .put<any>(`api/users`, updatedUser, {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));

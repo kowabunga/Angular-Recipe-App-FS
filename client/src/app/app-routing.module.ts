@@ -10,6 +10,7 @@ import { UserComponent } from './components/user/user/user.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ResetPasswordComponent } from './components/user/reset-password/reset-password.component';
 import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
+import { NotFoundComponent } from './components/layout/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'user/account', canActivate: [AuthGuard], component: UserComponent },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'passwordreset/:token', component: ResetPasswordComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

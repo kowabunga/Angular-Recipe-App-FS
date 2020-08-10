@@ -22,6 +22,7 @@ import { EditRecipeComponent } from './components/recipes/edit-recipe/edit-recip
 import { UserComponent } from './components/user/user/user.component';
 import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/user/reset-password/reset-password.component';
+import { NotFoundComponent } from './components/layout/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ResetPasswordComponent } from './components/user/reset-password/reset-p
     UserComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

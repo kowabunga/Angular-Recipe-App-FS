@@ -10,6 +10,12 @@ Attempting to download/clone the repository and run it locally will fail, as the
 
 # Delectable Recipes Supports the Following Functionalities:
 
+- Test Account:
+
+  - A test account has been created for users to test the site. The information is as follows:
+    - email: msmith@gmail.com
+    - password: 123456
+
 - Viewing Recipes:
 
   - A user of the site can easily view recipes created by other users. These recipes include steps that can be easily paginated through via prev/next buttons in addition to a direct link to individuals Steps at the top of the step.
