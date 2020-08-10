@@ -2,7 +2,7 @@
 
 Delectable Recipes is a full stack single page application with the front end built in Angular 9 and the back end with Node/Express.js using MongoDB as its database.
 
-The live link for the app is here:
+The live link for the app is here: https://angular-recipe-app-fs.herokuapp.com
 
 Attempting to download/clone the repository and run it locally will fail, as the repository does not contain the various configuration variables, maily because they include secret keys/passwords.
 
