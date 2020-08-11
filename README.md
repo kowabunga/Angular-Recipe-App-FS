@@ -6,7 +6,7 @@ The live link for the app is here: https://angular-recipe-app-fs.herokuapp.com
 
 Attempting to download/clone the repository and run it locally will fail, as the repository does not contain the various configuration variables, maily because they include secret keys/passwords.
 
-**Note**: This app is hosted on Heroku and may take a few minutes to start up if the website has not been visited recently. If so, please be patient and let Heroku restart the website.
+**Note**: This app is hosted on **Heroku** and may take a few minutes to start up if the website has not been visited recently. If so, please be patient and let Heroku restart the website.
 
 # Delectable Recipes Supports the Following Functionalities:
 
