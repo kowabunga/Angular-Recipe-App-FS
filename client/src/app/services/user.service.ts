@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandlingService } from './error-handling.service';
 import { User } from '../models/User';
 import { Recipe } from '../models/Recipe';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,7 +27,7 @@ export class UserService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .get<Recipe[]>('api/users/recipes', {
+      .get<Recipe[]>(`${environment.url}api/users/recipes`, {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));
@@ -37,7 +38,7 @@ export class UserService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .get<User>('api/users', { headers: headers })
+      .get<User>(`${environment.url}api/users`, { headers: headers })
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -47,7 +48,7 @@ export class UserService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .put<any>(`api/users`, updatedUser, {
+      .put<any>(`${environment.url}api/users`, updatedUser, {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));

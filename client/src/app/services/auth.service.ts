@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ErrorHandlingService } from './error-handling.service';
 import { User } from '../models/User';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,7 +28,7 @@ export class AuthService {
     let user = { email, password };
 
     return this.http
-      .post<any>('api/auth', user, httpOptions)
+      .post<any>(`${environment.url}api/auth`, user, httpOptions)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -40,7 +41,7 @@ export class AuthService {
     let user = new User(name, email, password);
 
     return this.http
-      .post<User>('api/users', user, httpOptions)
+      .post<User>(`${environment.url}api/users`, user, httpOptions)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -57,7 +58,7 @@ export class AuthService {
   requestResetPasswordLink(email: string): Observable<any> {
     return this.http
       .post<any>(
-        `api/auth/reset`,
+        `${environment.url}api/auth/reset`,
         {
           email: email,
         },
@@ -69,7 +70,7 @@ export class AuthService {
   resetPassword(password: string, token: string): Observable<any> {
     return this.http
       .patch<any>(
-        `api/auth/reset/${token}`,
+        `${environment.url}api/auth/reset/${token}`,
         { password: password },
         httpOptions
       )

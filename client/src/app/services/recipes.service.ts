@@ -4,6 +4,7 @@ import { Recipe } from '../models/Recipe';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { ErrorHandlingService } from '../services/error-handling.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,13 +17,13 @@ export class RecipesService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http
-      .get<Recipe[]>('api/recipes')
+      .get<Recipe[]>(`${environment.url}api/recipes`)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
   getRecipeById(id: string): Observable<Recipe> {
     return this.http
-      .get<Recipe>(`api/recipes/${id}`)
+      .get<Recipe>(`${environment.url}api/recipes/${id}`)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 
@@ -33,7 +34,7 @@ export class RecipesService {
     });
 
     return this.http
-      .post<Recipe>('api/recipes', recipe, {
+      .post<Recipe>(`${environment.url}api/recipes`, recipe, {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));
@@ -45,7 +46,7 @@ export class RecipesService {
       'x-auth-token': localStorage.getItem('jwt'),
     });
     return this.http
-      .put<Recipe>(`api/recipes/${id}`, recipe, {
+      .put<Recipe>(`${environment.url}api/recipes/${id}`, recipe, {
         headers: headers,
       })
       .pipe(catchError(this.errorHandler.handleHttpError));
@@ -53,7 +54,7 @@ export class RecipesService {
 
   deleteRecipe(id: string): Observable<any> {
     return this.http
-      .delete<Recipe>(`api/recipes/${id}`)
+      .delete<Recipe>(`${environment.url}api/recipes/${id}`)
       .pipe(catchError(this.errorHandler.handleHttpError));
   }
 }
