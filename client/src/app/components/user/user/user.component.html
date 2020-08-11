@@ -31,7 +31,13 @@
       <form class="edit-user-form">
         <mat-form-field appearance="outline">
           <mat-label>Name</mat-label>
-          <input type="text" matInput name="userName" [(ngModel)]="user.name" />
+          <input
+            type="text"
+            matInput
+            name="userName"
+            [(ngModel)]="user.name"
+            [disabled]="user.email === 'test@test.com'"
+          />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -41,6 +47,7 @@
             matInput
             name="userEmail"
             [(ngModel)]="user.email"
+            [disabled]="user.email === 'test@test.com'"
           />
         </mat-form-field>
 
@@ -51,6 +58,7 @@
             matInput
             name="userPassword"
             [(ngModel)]="oldPassword"
+            [disabled]="user.email === 'test@test.com'"
           />
         </mat-form-field>
 
@@ -61,6 +69,7 @@
             matInput
             name="userPassword"
             [(ngModel)]="newPassword"
+            [disabled]="user.email === 'test@test.com'"
           />
         </mat-form-field>
 
