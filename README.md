@@ -13,7 +13,7 @@ Attempting to download/clone the repository and run it locally will fail, as the
 - Test Account:
 
   - A test account has been created for users to test the site. The information is as follows:
-    - email: msmith@gmail.com
+    - email: test@test.com
     - password: 123456
 
 - Viewing Recipes:
