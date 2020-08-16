@@ -152,9 +152,7 @@ async function sendEmail(req, user, token) {
       host: process.env.SMTP_HOST,
       secureConnection: false,
       port: process.env.SMPT_PORT,
-      tls: {
-        ciphers: 'SSLv3',
-      },
+
       auth: {
         user: process.env.SMPT_USERNAME,
         pass: process.env.SMPT_PASSWORD,
@@ -182,3 +180,4 @@ async function sendEmail(req, user, token) {
     });
   }
 }
+1;

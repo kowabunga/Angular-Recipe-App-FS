@@ -19,5 +19,14 @@
     "mongoose": "^5.9.27",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kowabunga/Angular-Recipe-App-FS.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/kowabunga/Angular-Recipe-App-FS/issues"
+  },
+  "homepage": "https://github.com/kowabunga/Angular-Recipe-App-FS#readme"
 }
