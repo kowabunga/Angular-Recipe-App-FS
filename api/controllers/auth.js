@@ -180,4 +180,3 @@ async function sendEmail(req, user, token) {
     });
   }
 }
-1;
